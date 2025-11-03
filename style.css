@@ -1,0 +1,736 @@
+body {
+    font-family: 'Noto Sans JP', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 25%, #4a5568 50%, #2d3748 75%, #1a202c 100%);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+    min-height: 100vh;
+    color: #333;
+    position: relative;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.08) 0%, transparent 50%),
+        linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.calendar-container {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(200, 200, 220, 0.1) 100%);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.3);
+    padding: 30px;
+    max-width: 900px;
+    margin: 30px auto;
+    position: relative;
+    z-index: 1;
+}
+
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 50%, #2c3e50 100%);
+    background-size: 200% 200%;
+    animation: metallicShine 3s ease-in-out infinite;
+    color: white;
+    padding: 15px 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+@keyframes metallicShine {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+.header h1 {
+    margin: 0 15px;
+    font-size: 2.8em; /* さらに大きな文字で */
+    font-weight: 700;
+}
+
+.control-panel {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+    justify-content: flex-start;
+}
+
+.data-entry-btn {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%);
+    background-size: 200% 200%;
+    animation: metallicShine 3s ease-in-out infinite;
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 12px 25px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.1em;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    white-space: nowrap;
+}
+
+.data-entry-btn:hover {
+    background: linear-gradient(135deg, #2d2d2d 0%, #3d3d3d 50%, #2d2d2d 100%);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+.data-text-export-area-compact {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: #FFEB3B;
+    border-radius: 8px;
+    padding: 10px 15px;
+    border: 1px solid rgba(255, 235, 59, 0.3);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    margin-bottom: 25px;
+}
+
+.data-text-export-area-compact .export-options {
+    margin-bottom: 0;
+    display: flex;
+    gap: 10px;
+}
+
+.data-text-export-area-compact .export-options label {
+    margin-right: 0;
+    font-size: 0.9em;
+}
+
+.data-text-export-area-compact button {
+    padding: 8px 15px;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%);
+    background-size: 200% 200%;
+    animation: metallicShine 3s ease-in-out infinite;
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    white-space: nowrap;
+}
+
+.data-text-export-area-compact button:hover {
+    background: linear-gradient(135deg, #2d2d2d 0%, #3d3d3d 50%, #2d2d2d 100%);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+.header button {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%);
+    background-size: 200% 200%;
+    animation: metallicShine 3s ease-in-out infinite;
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 12px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.3em;
+    margin: 0 8px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.header button:hover {
+    background: linear-gradient(135deg, #2d2d2d 0%, #3d3d3d 50%, #2d2d2d 100%);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+.item-definition-area {
+    background-color: #000000;
+    color: #FFEB3B; /* 明るい黄色 */
+    border-radius: 12px;
+    padding: 25px;
+    margin-bottom: 25px;
+    border: 1px solid rgba(255, 235, 59, 0.3); /* 黄色のボーダー */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.data-text-export-area {
+    background-color: #000000;
+    color: #FFEB3B; /* 明るい黄色 */
+    border-radius: 12px;
+    padding: 25px;
+    margin-bottom: 25px;
+    border: 1px solid rgba(255, 235, 59, 0.3); /* 黄色のボーダー */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.item-definition-area h2,
+.data-text-export-area h2 {
+    font-size: 1.8em;
+    color: #FFEB3B; /* 明るい黄色 */
+    margin-bottom: 20px;
+}
+
+.export-options {
+    margin-bottom: 15px;
+}
+
+.export-options label {
+    margin-right: 15px;
+    font-size: 1em;
+    color: #FFEB3B; /* 明るい黄色 */
+    cursor: pointer;
+}
+
+.export-options input[type="radio"] {
+    margin-right: 5px;
+    accent-color: #FFEB3B; /* ラジオボタンの色を黄色に */
+}
+
+.item-definition-area h2[contenteditable="true"],
+.item-definition-area h3[contenteditable="true"] {
+    border: 1px dashed rgba(255, 235, 59, 0.5); /* 黄色の破線 */
+    padding: 8px 10px;
+    min-width: 120px;
+    display: inline-block;
+    background-color: rgba(0, 0, 0, 0.5); /* より暗い背景 */
+    color: #FFEB3B; /* 明るい黄色 */
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.item-definition-area h2[contenteditable="true"]:focus,
+.item-definition-area h3[contenteditable="true"]:focus {
+    border-color: #FFEB3B; /* フォーカス時に黄色 */
+    background-color: rgba(0, 0, 0, 0.7);
+    outline: none;
+}
+
+.item-definition-area h3 {
+    font-size: 1.3em;
+    color: #FFEB3B; /* 明るい黄色 */
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+.item-definition-area textarea {
+    width: calc(100% - 20px); /* 左右のパディングを考慮 */
+    height: 70px;
+    padding: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #ffffff;
+    border-radius: 6px;
+    font-size: 1em;
+    resize: vertical;
+    transition: all 0.3s ease;
+}
+
+.item-definition-area textarea:focus {
+    border-color: rgba(255, 255, 255, 0.6);
+    background-color: rgba(0, 0, 0, 0.7);
+    outline: none;
+}
+
+.item-definition-area button {
+    padding: 12px 20px;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%);
+    background-size: 200% 200%;
+    animation: metallicShine 3s ease-in-out infinite;
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1em;
+    margin-top: 15px;
+    margin-right: 10px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.item-definition-area button:hover {
+    background: linear-gradient(135deg, #2d2d2d 0%, #3d3d3d 50%, #2d2d2d 100%);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+.data-text-export-area button {
+    padding: 12px 20px;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%);
+    background-size: 200% 200%;
+    animation: metallicShine 3s ease-in-out infinite;
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.data-text-export-area button:hover {
+    background: linear-gradient(135deg, #2d2d2d 0%, #3d3d3d 50%, #2d2d2d 100%);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+.dates-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* 日付間のスペース */
+}
+
+.date-row {
+    display: flex;
+    align-items: flex-start; /* アイテムが複数行になっても対応 */
+    padding: 15px 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    transition: background-color 0.2s ease;
+}
+
+.date-row:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.date-row:last-child {
+    border-bottom: none;
+}
+
+.date {
+    font-size: 1.4em; /* 日付を少し大きく */
+    font-weight: 600;
+    width: 60px; /* 日付の幅を調整 */
+    text-align: center;
+    cursor: pointer;
+    padding: 5px 0;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    border: 2px solid #2196F3; /* 常にボーダーを表示（青） */
+    background-color: #E3F2FD; /* 常に背景色を表示（薄い青） */
+    position: relative;
+}
+
+.date:hover {
+    background-color: #BBDEFB; /* ホバー時は少し濃い青 */
+    border-color: #1976D2; /* ホバー時のボーダー色（濃い青） */
+    transform: scale(1.05); /* 少し拡大 */
+    box-shadow: 0 2px 8px rgba(33, 150, 243, 0.3); /* ホバー時の影 */
+}
+
+.date:active {
+    transform: scale(0.98); /* クリック時の小さな縮小 */
+}
+
+.date::after {
+    content: '✏️'; /* 鉛筆アイコン（絵文字） */
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    font-size: 0.8em;
+    opacity: 1; /* 常に表示 */
+    transition: opacity 0.2s ease;
+    background-color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    line-height: 20px; /* 縦方向中央揃え */
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    pointer-events: none; /* クリックイベントを無効化 */
+}
+
+.today {
+    background-color: #FFEB3B !important; /* 黄色でハイライト（!importantで上書き） */
+    color: #333;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-color: #FBC02D !important; /* 今日の日付もボーダーを表示（濃い黄色） */
+}
+
+.today:hover {
+    background-color: #FFF176 !important; /* ホバー時はより明るい黄色 */
+    border-color: #F9A825 !important; /* ホバー時のボーダー色（より濃い黄色） */
+    box-shadow: 0 2px 8px rgba(251, 192, 45, 0.4); /* ホバー時の影 */
+}
+
+.item-display-area {
+    flex-grow: 1;
+    padding: 10px 10px 10px 25px; /* 左側のパディングを保持 */
+    background-color: rgba(0, 0, 0, 0.8); /* より暗い背景 */
+    border-radius: 8px;
+    color: #FFEB3B; /* 明るい黄色 */
+    font-size: 0.95em;
+    line-height: 1.5;
+    display: flex;
+    flex-direction: column;
+}
+
+.items-container {
+    /* アイテム表示部分（上段） */
+}
+
+.item-display-area p {
+    margin: 0 0 5px 0;
+    color: #FFEB3B; /* 明るい黄色 */
+    font-weight: 500;
+}
+
+.location-time-container {
+    display: flex;
+    flex-direction: row;
+    gap: 20px; /* 場所と時間の間隔 */
+    margin-top: 10px;
+    align-items: flex-start;
+}
+
+.location-area {
+    display: flex;
+    flex-direction: column;
+    width: 150px; /* 場所入力フィールドの幅を調整 */
+}
+
+.location-area label {
+    font-size: 0.85em;
+    color: #FFEB3B; /* 明るい黄色 */
+    margin-bottom: 5px;
+}
+
+.location-area textarea {
+    width: calc(100% - 10px);
+    height: 40px;
+    padding: 5px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #ffffff;
+    border-radius: 4px;
+    font-size: 0.85em;
+    resize: vertical;
+    transition: all 0.3s ease;
+}
+
+.location-area textarea:focus {
+    border-color: rgba(255, 255, 255, 0.6);
+    background-color: rgba(0, 0, 0, 0.7);
+    outline: none;
+}
+
+.time-area {
+    display: flex;
+    flex-direction: column;
+    width: 100px; /* 時間入力フィールドの幅を調整 */
+}
+
+.time-area label {
+    font-size: 0.85em;
+    color: #FFEB3B; /* 明るい黄色 */
+    margin-bottom: 5px;
+}
+
+.time-area input[type="time"] {
+    width: calc(100% - 10px);
+    padding: 5px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #ffffff;
+    border-radius: 4px;
+    font-size: 0.85em;
+    transition: all 0.3s ease;
+}
+
+.time-area input[type="time"]:focus {
+    border-color: rgba(255, 255, 255, 0.6);
+    background-color: rgba(0, 0, 0, 0.7);
+    outline: none;
+}
+
+/* モーダル関連のスタイル */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000; /* 最前面に表示 */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.6); /* 背景を暗く */
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%);
+    background-size: 200% 200%;
+    animation: metallicShine 3s ease-in-out infinite;
+    color: #ffffff;
+    padding: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    width: 90%;
+    max-width: 650px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    position: relative;
+    max-height: 90vh; /* ビューポートの高さの90%に制限 */
+    overflow-y: auto; /* はみ出た場合にスクロール */
+}
+
+.close-button {
+    color: rgba(255, 255, 255, 0.7);
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 32px;
+    font-weight: normal;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: #ffffff;
+    transform: scale(1.2);
+}
+
+.modal-content h2 {
+    font-size: 2em;
+    color: #ffffff;
+    margin-top: 0;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.modal-content h3 {
+    color: #ffffff;
+}
+
+.modal-content .item-selection-sections-wrapper {
+    display: flex;
+    justify-content: space-around; /* アイテム1とアイテム2を左右に配置 */
+    gap: 20px;
+}
+
+.modal-content .item-selection-section {
+    flex: 1;
+    min-width: 250px; /* 最小幅を設定 */
+}
+
+.item-selection-section {
+    margin-bottom: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 20px;
+}
+
+.item-selection-section:first-child {
+    border-top: none;
+    padding-top: 0;
+}
+
+.item-selection-section select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #ffffff;
+    border-radius: 5px;
+    font-size: 1em;
+    -webkit-appearance: none; /* デフォルトの矢印を非表示 */
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23ffffff%22%20d%3D%22M287%2C114.7L146.2%2C255.5L5.4%2C114.7c-7.8-7.8-20.5-7.8-28.3,0c-7.8,7.8-7.8,20.5,0,28.3l146.2,146.2c3.9,3.9,9,5.9,14.1,5.9s10.2-2,14.1-5.9l146.2-146.2c7.8-7.8,7.8-20.5,0-28.3C307.5,106.9,294.9,106.9,287,114.7z%22%2F%3E%3C%2Fsvg%3E');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 12px;
+    transition: all 0.3s ease;
+}
+
+.item-selection-section select:focus {
+    border-color: rgba(255, 255, 255, 0.6);
+    background-color: rgba(0, 0, 0, 0.7);
+    outline: none;
+}
+
+.modal-buttons {
+    text-align: right;
+    margin-top: 30px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 20px;
+}
+
+.modal-buttons button {
+    padding: 12px 25px;
+    margin-left: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.1em;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.modal-buttons button:active {
+    transform: translateY(1px);
+}
+
+#saveSelection {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%);
+    background-size: 200% 200%;
+    animation: metallicShine 3s ease-in-out infinite;
+}
+
+#saveSelection:hover {
+    background: linear-gradient(135deg, #2d2d2d 0%, #3d3d3d 50%, #2d2d2d 100%);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+#cancelSelection {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%);
+    background-size: 200% 200%;
+    animation: metallicShine 3s ease-in-out infinite;
+}
+
+#cancelSelection:hover {
+    background: linear-gradient(135deg, #2d2d2d 0%, #3d3d3d 50%, #2d2d2d 100%);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+/* ファイル一覧のスタイル */
+#filesList {
+    max-height: 400px;
+    overflow-y: auto;
+    margin-bottom: 20px;
+}
+
+.file-item {
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 235, 59, 0.3);
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.file-item:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+    border-color: rgba(255, 235, 59, 0.5);
+}
+
+.file-info {
+    flex-grow: 1;
+}
+
+.file-name {
+    color: #FFEB3B;
+    font-size: 1.1em;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.file-date {
+    color: rgba(255, 235, 59, 0.7);
+    font-size: 0.85em;
+}
+
+.file-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.file-action-btn {
+    padding: 8px 15px;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%);
+    background-size: 200% 200%;
+    animation: metallicShine 3s ease-in-out infinite;
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    white-space: nowrap;
+}
+
+.file-action-btn:hover {
+    background: linear-gradient(135deg, #2d2d2d 0%, #3d3d3d 50%, #2d2d2d 100%);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+.file-action-btn.delete-btn {
+    background: linear-gradient(135deg, #8b0000 0%, #a00000 50%, #8b0000 100%);
+}
+
+.file-action-btn.delete-btn:hover {
+    background: linear-gradient(135deg, #a00000 0%, #b00000 50%, #a00000 100%);
+}
+
+#filesList:empty::before {
+    content: "保存されたファイルがありません";
+    color: rgba(255, 235, 59, 0.5);
+    display: block;
+    text-align: center;
+    padding: 40px;
+    font-size: 1.1em;
+}
+
+/* モバイル表示対応 */
+@media (max-width: 600px) {
+    .control-panel {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .data-text-export-area-compact {
+        flex-wrap: wrap;
+        gap: 10px;
+        padding: 10px;
+    }
+
+    .data-text-export-area-compact .export-options {
+        flex-wrap: wrap;
+    }
+
+    .file-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .file-actions {
+        width: 100%;
+        margin-top: 10px;
+        justify-content: flex-end;
+    }
+
+    .file-action-btn {
+        flex: 1;
+    }
+}

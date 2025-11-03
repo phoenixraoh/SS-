@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>カレンダー</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="manifest" href="manifest.json" />
+    <!-- favicon.icoの自動リクエストを防ぐ -->
+    <link rel="icon" href="data:," />
+  </head>
+  <body>
+    <div class="calendar-container">
+      <div class="header">
+        <h1 id="currentYear"></h1>
+        <button id="prevMonth">＜</button>
+        <h1 id="currentMonth"></h1>
+        <button id="nextMonth">＞</button>
+      </div>
+
+      <div class="control-panel">
+        <button id="toggleItemDefinitionBtn" class="data-entry-btn">
+          データ記入
+        </button>
+        <button id="toggleDataSaveBtn" class="data-entry-btn">
+          データ保存
+        </button>
+      </div>
+
+      <div
+        class="data-text-export-area-compact"
+        id="dataSaveArea"
+        style="display: none"
+      >
+        <div class="export-options">
+          <label>
+            <input type="radio" name="exportScope" value="month" checked />
+            今月
+          </label>
+          <label>
+            <input type="radio" name="exportScope" value="year" /> 今年
+          </label>
+        </div>
+        <button id="exportToTextBtn">日付保存</button>
+        <button id="viewFilesBtn">保存閲覧</button>
+      </div>
+
+      <div
+        class="item-definition-area"
+        id="itemDefinitionArea"
+        style="display: none"
+      >
+        <h2 id="itemDefinitionTitle" contenteditable="true">アイテム定義</h2>
+        <div>
+          <h3 id="item1Label" contenteditable="true">アイテム1</h3>
+          <textarea
+            id="item1Definition"
+            placeholder="カンマ区切りで入力してください (例: 田中,鈴木,佐藤)"
+          ></textarea>
+        </div>
+        <div>
+          <h3 id="item2Label" contenteditable="true">アイテム2</h3>
+          <textarea
+            id="item2Definition"
+            placeholder="カンマ区切りで入力してください (例: 買い物,会議,提出)"
+          ></textarea>
+        </div>
+      </div>
+
+      <div class="dates-container" id="datesContainer">
+        <!-- 日付がここに動的に生成されます -->
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+  <!-- ファイル一覧モーダル -->
+  <div id="filesModal" class="modal">
+    <div class="modal-content">
+      <span class="close-button" id="closeFilesModal">&times;</span>
+      <h2>保存されたファイル</h2>
+      <div id="filesList"></div>
+      <div class="modal-buttons">
+        <button id="closeFilesBtn">閉じる</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- モーダルウィンドウ -->
+  <div id="itemSelectionModal" class="modal">
+    <div class="modal-content">
+      <span class="close-button">&times;</span>
+      <h2><span id="modalDate"></span>のアイテム選択</h2>
+      <div class="item-selection-sections-wrapper">
+        <div class="item-selection-section">
+          <h3>アイテム1</h3>
+          <div id="item1Selects"></div>
+        </div>
+        <div class="item-selection-section">
+          <h3>アイテム2</h3>
+          <div id="item2Selects"></div>
+        </div>
+      </div>
+      <div class="modal-buttons">
+        <button id="saveSelection">OK</button>
+        <button id="cancelSelection">キャンセル</button>
+      </div>
+    </div>
+  </div>
+</html>
