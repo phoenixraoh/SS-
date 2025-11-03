@@ -124,7 +124,7 @@ document.addEventListener("DOMContentLoaded", () => {
       console.log('Service Worker API supported.');
       window.addEventListener('load', () => {
           console.log('Attempting to register service worker...');
-          navigator.serviceWorker.register('/service-worker.js') // パスを修正
+          navigator.serviceWorker.register('./service-worker.js') // 相対パスに変更
               .then((registration) => {
                   console.log('ServiceWorker registration successful with scope: ', registration.scope);
                   

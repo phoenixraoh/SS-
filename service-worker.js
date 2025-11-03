@@ -1,12 +1,12 @@
-const CACHE_NAME = 'calendar-app-v6';
+const CACHE_NAME = 'calendar-app-v7';
 const urlsToCache = [
-    '/index.html',
-    '/style.css',
-    '/script.js',
-    '/manifest.json',
-    // アイコン画像もキャッシュに含める (必要に応じてパスを調整)
-    '/images/icon-192x192.png',
-    '/images/icon-512x512.png'
+    './index.html',
+    './style.css',
+    './script.js',
+    './manifest.json',
+    // アイコン画像もキャッシュに含める
+    './images/icon-192x192.png',
+    './images/icon-512x512.png'
 ];
 
 self.addEventListener('install', (event) => {
